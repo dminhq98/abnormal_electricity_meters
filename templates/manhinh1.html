@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id='main'>
+        <div class="container">
+            <h3 id='title'>Danh sách các hộ có số điện bất thường</h3>
+            <table class="table table-hover" style="margin-top: 5%;">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Chủ hộ</th>
+                        <th>Địa chỉ</th>
+                        <th>Mức</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for item in res %}
+                    <tr>
+                        <td>{{item.stt}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.location}}</td>
+                        <td>Mức {{item.level}}</td>
+                    </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+            {% if res.has_other_pages %}
+                        <ul class="pagination justify-content-center">
+                            {% if res.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ res.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><span class="page-link" >&laquo;</span></li>
+                            {% endif %}
+                            {% for i in res.paginator.page_range %}
+                            {% if res.number == i %}
+                                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                            {% else %}
+                                <li class="page-item" ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if res.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ res.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+            <a href="month" class="btn btn-info" style="margin-top: 30px;" role="button">Xem tất cả danh sách</a>
+        </div>
+    </section>
+{% endblock %}
