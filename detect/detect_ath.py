@@ -123,25 +123,25 @@ class CountWeirdo:
         ten_mx = np.linalg.norm(matrix, axis= 2)
         tb = 4.7*np.sum(ten_mx, axis= None)/(ten_mx.shape[0]*ten_mx.shape[1]) # quy dinh muc bat thuong
         max = np.amax(ten_mx) # lay gia tri bat thuong cao nhat
-        tb3 = (max-tb)/3 +tb # muc bat thuong 3 (hoi bat thuong)
-        tb2 = 2*(max-tb)/3+tb # muc bat thuong 2 (kha bat thuong) (lon hon muc 2 la rat bat thuong)
+        # tb3 = (max-tb)/3 +tb # muc bat thuong 3 (hoi bat thuong)
+        tb2 = (max-tb)*0.65+tb # muc bat thuong 2 (kha bat thuong) (lon hon muc 2 la rat bat thuong)
         # print(tb)
         # print(tb3)
         # print(tb2)
 
-        top1 = np.sort(ten_mx, axis= None)[-50:]
+        top1 = np.sort(ten_mx, axis= None)[-60:]
         # print(len(top1))
         top_mot = []
         top_hai = []
-        top_ba = []
+        # top_ba = []
 
         for i in range(len(top1)):
-            if (top1[i] >= tb) and (top1[i] < tb3):
-                top_ba.append(top1[i])
-            elif top1[i] >= tb3 and top1[i] < tb2:
+            if (top1[i] >= tb) and (top1[i] < tb2):
                 top_hai.append(top1[i])
-            elif top1[i] >= tb2 and top1[i] <= max:
+            elif top1[i] >= tb2 and top1[i] < max:
                 top_mot.append(top1[i])
+            # elif top1[i] >= tb2 and top1[i] <= max:
+            #     top_mot.append(top1[i])
 
         try:
             result2 = np.where((ten_mx <= top_hai[-1]) & (ten_mx >= top_hai[0]))
@@ -155,15 +155,15 @@ class CountWeirdo:
         except:
             listOfCoordinates1 = None
 
-        try:
-            result3 = np.where((ten_mx <= top_ba[-1]) & (ten_mx >= top_ba[0]))
-            listOfCoordinates3= list(zip(result3[0], result3[1]))
+        # try:
+        #     result3 = np.where((ten_mx <= top_ba[-1]) & (ten_mx >= top_ba[0]))
+        #     listOfCoordinates3= list(zip(result3[0], result3[1]))
 
-        except:
-            # result = 0
-            listOfCoordinates3 = None
+        # except:
+        #     # result = 0
+        #     listOfCoordinates3 = None
         # print(listOfCoordinates)
-        return  listOfCoordinates3, listOfCoordinates2, listOfCoordinates1 # tb, ten_mx[1], top1
+        return listOfCoordinates2, listOfCoordinates1 # tb, ten_mx[1], top1
 
 
 #======================================================================================

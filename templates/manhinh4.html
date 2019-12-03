@@ -6,7 +6,7 @@
             <div style="margin-left:9%; margin-top: -5%;">
                 <h5 id='title'>Chủ Hộ:{{item.name}}</h5>
                 <h6>Địa chỉ: {{item.location}}</h6>
-                <h6>Tháng sử dụng điện bất thường: Tháng {{mouth}}</h6>
+                <h6>Tháng sử dụng điện bất thường: Tháng {{item.mouth}}</h6>
                 <h6 style="color: red;">Mức cảnh báo: {{item.level}}</h6>
             </div>
             <div class="row">
@@ -16,7 +16,11 @@
                 </div>
                 <div class="col-md-1"></div>
             </div>
-            <a href="{{id}}" class="btn btn-info" style="margin-top: 30px;" role="button">Trở lại</a>
+            {% if id %}
+                <a href="{{id}}" class="btn btn-info" style="margin-top: 30px;" role="button">Trở lại</a>
+            {% else %}
+                <a href="/" class="btn btn-info" style="margin-top: 30px;" role="button">Trở lại</a>
+            {% endif %}
         </div>
     </section>
 {% endblock %}

@@ -26,23 +26,25 @@ class Screen1(View):
             f2 = f2.read()
             f2 = f2.split('\n')
             res = []
-            res1=[]
-            res2=[]
-            stt=0
-            for i in range(3):
+            res1 = []
+            res2 = []
+            stt = 0
+            for i in range(2):
                 if result_fa[i] != None:
                     for j in result_fa[i]:
                         index = j[0]
                         if index not in res1:
                             stt += 1
-
                             inform = f1[index]
                             inform = inform.split('____')
                             data = {
                                 'stt':stt,
                                 'name': inform[0],
                                 'location': inform[1],
+                                'type': 1,
+                                'id': index,
                                 'level': i + 1,
+                                'mouth':j[1]+1,
                             }
                             res1.append(index)
                             res.append(data)
@@ -59,7 +61,10 @@ class Screen1(View):
                                 'stt':stt,
                                 'name': inform[0],
                                 'location': inform[1],
+                                'type': 2,
+                                'id': index,
                                 'level': i + 1,
+                                'mouth': j[1]+1,
                             }
                             res2.append(index)
                             res.append(data)
@@ -172,10 +177,10 @@ class Screen3(View):
             f2 = f2.split('\n')
             res = []
             stt = 0
-            for i in range(3):
+            for i in range(2):
                 if result_fa[i] != None:
                     for j in result_fa[i]:
-                        mouth=j[1]
+                        mouth=j[1]+1
                         if mouth == date['mouth']:
                             stt += 1
                             index = j[0]
@@ -188,13 +193,14 @@ class Screen3(View):
                                 'name': inform[0],
                                 'location': inform[1],
                                 'level': i + 1,
+                                'mouth': j[1]+1,
                             }
                             # if data not in res:
                             res.append(data)
 
                 if result_bu[i] != None:
                     for j in result_bu[i]:
-                        mouth = j[1]
+                        mouth = j[1]+1
                         if mouth == date['mouth']:
                             stt += 1
                             index = j[0]
@@ -207,6 +213,7 @@ class Screen3(View):
                                 'name': inform[0],
                                 'location': inform[1],
                                 'level': i + 1,
+                                'mouth': j[1]+1,
                             }
                             # if data not in res:
                             res.append(data)
@@ -231,18 +238,18 @@ class Screen4(View):
     def post(self, request):
         from ast import literal_eval
         item = request.POST['item']
-        mouth=request.POST['mouth']
-        id=request.POST['id']
-        item=literal_eval(item)
+        mouth = request.POST['mouth']
+        id = request.POST['id']
+        item = literal_eval(item)
         print(type(item))
         with open('data/data_family_2019.txt') as f1, \
                 open('data/data_small_business_2019.txt') as f2:
             if item['type'] == 1:
-                f=f1.read()
+                f = f1.read()
             else:
-                f=f2.read()
-            f=f.split('\n')
-            m=f[item['id']]
-            meter=m.split('   ')[1:]
+                f = f2.read()
+            f = f.split('\n')
+            m = f[item['id']]
+            meter = m.split('   ')[1:]
 
         return render(request, 'manhinh4.html',{'item':item,'meter':meter,'mouth':mouth,'id':id})

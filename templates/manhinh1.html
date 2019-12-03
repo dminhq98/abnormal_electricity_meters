@@ -11,16 +11,31 @@
                         <th>Chủ hộ</th>
                         <th>Địa chỉ</th>
                         <th>Mức</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                  {% for item in res %}
-                    <tr>
-                        <td>{{item.stt}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.location}}</td>
-                        <td>Mức {{item.level}}</td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td>{{item.stt}}</td>-->
+<!--                        <td>{{item.name}}</td>-->
+<!--                        <td>{{item.location}}</td>-->
+<!--                        <td>Mức {{item.level}}</td>-->
+<!--                    </tr>-->
+                    <form action="{% url 'Screen4' %}" method="post" >
+                            {% csrf_token %}
+                            <tr>
+                                <input type="hidden" id="item" name="item" value="{{item}}">
+                                <input type="hidden" id="mouth" name="mouth" value="{{item.mouth}}">
+                                <input type="hidden" id="id" name="id" value="{{id}}">
+                                <td>{{item.stt}}</td>
+                                <td><span>{{item.name}}</span></td>
+                                <td>{{item.location}}</td>
+                                <td>{{item.level}}</td>
+                                <td><button type="submit" title="Chi tiết" class="btn">Xem</button></td>
+
+                            </tr>
+                    </form>
                  {% endfor %}
                 </tbody>
             </table>
