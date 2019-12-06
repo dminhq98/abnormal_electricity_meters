@@ -121,11 +121,13 @@ class CountWeirdo:
         d3 = self.Tendency_present()
         matrix = self.Matrix_Tendency(d1, d2, d3)
         ten_mx = np.linalg.norm(matrix, axis= 2)
-        tb = 4.7*np.sum(ten_mx, axis= None)/(ten_mx.shape[0]*ten_mx.shape[1]) # quy dinh muc bat thuong
+        tb = 5.5*np.sum(ten_mx, axis= None)/(ten_mx.shape[0]*ten_mx.shape[1]) # quy dinh muc bat thuong
         max = np.amax(ten_mx) # lay gia tri bat thuong cao nhat
         # tb3 = (max-tb)/3 +tb # muc bat thuong 3 (hoi bat thuong)
-        tb2 = (max-tb)*0.65+tb # muc bat thuong 2 (kha bat thuong) (lon hon muc 2 la rat bat thuong)
-        # print(tb)
+        # tb2 = (max-tb)*0.65+tb # muc bat thuong 2 (kha bat thuong) (lon hon muc 2 la rat bat thuong)
+        tb2 = 4*tb
+        print(max)
+        print(tb)
         # print(tb3)
         # print(tb2)
 
