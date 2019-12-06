@@ -33,43 +33,43 @@ class Screen1(View):
                 if result_fa[i] != None:
                     for j in result_fa[i]:
                         index = j[0]
-                        if index not in res1:
-                            stt += 1
-                            inform = f1[index]
-                            inform = inform.split('____')
-                            data = {
-                                'stt':stt,
-                                'name': inform[0],
-                                'location': inform[1],
-                                'type': 1,
-                                'id': index,
-                                'level': i + 1,
-                                'mouth':j[1]+1,
-                            }
-                            res1.append(index)
-                            res.append(data)
+                        # if index not in res1:
+                        stt += 1
+                        inform = f1[index]
+                        inform = inform.split('____')
+                        data = {
+                            'stt': stt,
+                            'name': inform[0],
+                            'location': inform[1],
+                            'type': 1,
+                            'id': index,
+                            'level': i + 1,
+                            'mouth': j[1] + 1,
+                        }
+                        res1.append(index)
+                        res.append(data)
 
                 if result_bu[i] != None:
                     for j in result_bu[i]:
 
                         index = j[0]
-                        if index not in res2:
-                            stt += 1
-                            inform = f2[index]
-                            inform = inform.split('____')
-                            data = {
-                                'stt':stt,
-                                'name': inform[0],
-                                'location': inform[1],
-                                'type': 2,
-                                'id': index,
-                                'level': i + 1,
-                                'mouth': j[1]+1,
-                            }
-                            res2.append(index)
-                            res.append(data)
+                        # if index not in res2:
+                        stt += 1
+                        inform = f2[index]
+                        inform = inform.split('____')
+                        data = {
+                            'stt': stt,
+                            'name': inform[0],
+                            'location': inform[1],
+                            'type': 2,
+                            'id': index,
+                            'level': i + 1,
+                            'mouth': j[1] + 1,
+                        }
+                        res2.append(index)
+                        res.append(data)
             # print(res)
-        paginator = Paginator(res, 5)
+        paginator = Paginator(res, 10)
 
         pageNumber = request.GET.get('page')
         try:

@@ -163,7 +163,7 @@ class CountWeirdo:
         #     # result = 0
         #     listOfCoordinates3 = None
         # print(listOfCoordinates)
-        return listOfCoordinates2, listOfCoordinates1 # tb, ten_mx[1], top1
+        return listOfCoordinates1,listOfCoordinates2 # tb, ten_mx[1], top1
 
 
 #======================================================================================
