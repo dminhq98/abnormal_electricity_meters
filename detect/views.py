@@ -234,6 +234,78 @@ class Screen4(View):
     # def get(self,request):
     #
     #     return render(request,'manhinh4.html')
+    def get(self,request,type,id):
+        read_data = ReadData('data')
+        x_fa, x_bu = read_data.read_data()
+        # data = x_fa
+        test_fa = CountWeirdo(x_fa)
+        test_bu = CountWeirdo(x_bu)
+        result_fa = test_fa.Get_Tendency()
+        result_bu = test_bu.Get_Tendency()
+        item = {}
+        # print(result)
+        with open('data/information_family.txt') as f1, \
+                open('data/information_business.txt') as f2:
+            f1 = f1.read()
+            f1 = f1.split('\n')
+            f2 = f2.read()
+            f2 = f2.split('\n')
+            res = []
+            res1 = []
+            res2 = []
+            stt = 0
+            for i in range(2):
+                if type == 1:
+                    mouth = []
+                    for j in result_fa[i]:
+                            index = j[0]
+                            if id == index:
+                                m = j[1] + 1
+                                mouth.append(m)
+                                stt += 1
+                                inform = f1[index]
+                                inform = inform.split('____')
+                                data = {
+                                    'stt': stt,
+                                    'name': inform[0],
+                                    'location': inform[1],
+                                    'type': 1,
+                                    'id': index,
+                                    'level': i + 1,
+                                    'mouth': mouth,
+                                }
+                                item = dict(data)
+                else:
+                    mouth = []
+                    for j in result_bu[i]:
+                        index = j[0]
+                        if id == index:
+                            m = j[1] + 1
+                            mouth.append(m)
+                            stt += 1
+                            inform = f2[index]
+                            inform = inform.split('____')
+                            data = {
+                                'stt': stt,
+                                'name': inform[0],
+                                'location': inform[1],
+                                'type': 2,
+                                'id': index,
+                                'level': i + 1,
+                                'mouth': mouth,
+                            }
+                            item = dict(data)
+            # print(res)
+        with open('data/data_family_2019.txt') as f1, \
+                open('data/data_small_business_2019.txt') as f2:
+            if type == 1:
+                f = f1.read()
+            else:
+                f = f2.read()
+            f = f.split('\n')
+            m = f[id]
+            meter = m.split('   ')[1:]
+        return render(request,'manhinh4.html',{'item':item,'meter':meter})
 
     def post(self, request):
         from ast import literal_eval

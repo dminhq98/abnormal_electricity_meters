@@ -14,25 +14,28 @@
                                 <th>Chủ Hộ</th>
                                 <th>Địa Chỉ</th>
                                 <th>Mức</th>
-                                <th>Chi tiết</th>
+<!--                                <th>Chi tiết</th>-->
                             </tr>
                         </thead>
                         <tbody>
                         {% for item in res %}
-                        <form action="{% url 'Screen4' %}" method="post" >
-                            {% csrf_token %}
-                            <tr>
-                                <input type="hidden" id="item" name="item" value="{{item}}">
-                                <input type="hidden" id="mouth" name="mouth" value="{{mouth}}">
-                                <input type="hidden" id="id" name="id" value="{{id}}">
-                                <td>{{item.stt}}</td>
-                                <td><span>{{item.name}}</span></td>
-                                <td>{{item.location}}</td>
-                                <td>{{item.level}}</td>
-                                <td><button type="submit" title="Chi tiết" class="btn">Xem</button></td>
+                        <tr onclick="window.location='/detal/{{item.type}}/{{item.id}}';">
+                            <td>{{item.stt}}</td>
+                            <td><span>{{item.name}}</span></td>
+                            <td>{{item.location}}</td>
+                            <td>{{item.level}}</td>
+                        </tr>
+<!--                        <form action="{% url 'Screen4' %}" method="post" >-->
+<!--                            {% csrf_token %}-->
+<!--                            <tr>-->
+<!--                                <input type="hidden" id="item" name="item" value="{{item}}">-->
+<!--                                <input type="hidden" id="mouth" name="mouth" value="{{mouth}}">-->
+<!--                                <input type="hidden" id="id" name="id" value="{{id}}">-->
+<!--                                -->
+<!--                                <td><button type="submit" title="Chi tiết" class="btn">Xem</button></td>-->
 
-                            </tr>
-                        </form>
+<!--                            </tr>-->
+<!--                        </form>-->
                         {% endfor %}
                         </tbody>
                     </table>

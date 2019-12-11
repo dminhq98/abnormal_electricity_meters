@@ -6,7 +6,8 @@
             <div style="margin-left:9%; margin-top: -5%;">
                 <h5 id='title'>Chủ Hộ:{{item.name}}</h5>
                 <h6>Địa chỉ: {{item.location}}</h6>
-<!--                <h6>Tháng sử dụng điện bất thường: Tháng {{item.mouth}}</h6>-->
+                <h6>Tháng sử dụng điện bất thường: Tháng
+                    {% for i in item.mouth %} {{i}}; {% endfor %}</h6>
                 <h6 style="color: red;">Mức cảnh báo: {{item.level}}</h6>
             </div>
             <div class="row">

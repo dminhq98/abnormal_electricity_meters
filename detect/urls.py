@@ -6,4 +6,5 @@ urlpatterns = [
     path('month',Screen2.as_view(),name='Screen2' ),
     path('<int:num>',Screen3.as_view(),name='Screen3' ),
     path('detal',Screen4.as_view(),name='Screen4' ),
+    path('detal/<int:type>/<int:id>',Screen4.as_view(),name='Screen' ),
 ]
